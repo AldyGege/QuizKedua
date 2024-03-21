@@ -6,7 +6,7 @@ const Model_Kapal = require('../model/Model_Kapal.js');
 const Model_Dpi = require('../model/Model_Dpi.js');
 const Model_Alat_Tangkap = require('../model/Model_Alat_Tangkap.js');
 const Model_Pemilik = require('../model/Model_Pemilik.js');
-const Model_Mahasiswa = require('../model/Model_Mahasiswa.js');
+// const Model_Mahasiswa = require('../model/Model_Mahasiswa.js');
 
 router.get('/', async function(req, res, next) {
         let rows = await Model_Kapal.getAll();
@@ -16,13 +16,18 @@ router.get('/', async function(req, res, next) {
 });
 
 router.get('/create', async function (req, res, next) {
-    let rows = await Model_Mahasiswa.getAll();
+    let pemilik = await Model_Pemilik.getAll();
+    let dpi = await Model_Dpi.getAll();
+    let alat = await Model_Alat_Tangkap.getAll();
+    let rows = await Model_Kapal.getAll();
     res.render('kapal/create', {
         nama_kapal: '',
         id_pemilik: '',
         id_dpi: '',
         id_alat_tangkap: '',
-        data: rows
+        data1: alat,
+        data2: dpi,
+        data3: pemilik,
     })
 })
 
@@ -51,11 +56,11 @@ router.get('/edit/(:id)', async function (req, res, next) {
         id: rows[0].id_kapal,
         nama_kapal: rows[0].nama_kapal,
         id_alat_tangkap: rows[0].id_alat_tangkap,
-        data: alat,
+        data1: alat,
         id_dpi: rows[0].id_dpi,
-        data: dpi,
+        data2: dpi,
         id_pemilik: rows[0].id_pemilik,
-        data: pemilik,
+        data3: pemilik,
     })
 })
 
