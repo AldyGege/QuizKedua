@@ -10,6 +10,7 @@ const MemoryStore = require('session-memory-store')(session);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var superusersRouter = require('./routes/superusers');
 var pemilikRouter = require('./routes/pemilik');
 var alat_tangkapRouter = require('./routes/alat_tangkap');
 var dpiRouter = require('./routes/dpi');
@@ -45,6 +46,7 @@ app.use(flash())
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/superusers', superusersRouter);
 app.use('/pemilik', pemilikRouter);
 app.use('/alat_tangkap', alat_tangkapRouter);
 app.use('/dpi', dpiRouter);
