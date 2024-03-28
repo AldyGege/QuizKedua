@@ -4,7 +4,11 @@ class Model_Kapal {
 
     static async getAll() {
         return new Promise((resolve, reject) => {
-            connection.query('SELECT kapal.id_kapal, kapal.nama_kapal,pemilik.id_pemilik, pemilik.nama_pemilik, dpi.id_dpi, dpi.nama_dpi, alat_tangkap.id_alat_tangkap, alat_tangkap.nama_alat_tangkap FROM kapal JOIN pemilik ON kapal.id_pemilik = pemilik.id_pemilik JOIN dpi ON kapal.id_dpi = dpi.id_dpi JOIN alat_tangkap ON kapal.id_alat_tangkap = alat_tangkap.id_alat_tangkap', (err, rows) => {
+            connection.query(`SELECT a.*, b.nama_pemilik, c.nama_dpi, d.nama_alat_tangkap
+            FROM kapal as a
+            left JOIN pemilik as b ON b.id_pemilik = a.id_pemilik
+            left JOIN dpi as c ON c.id_dpi = a.id_dpi
+            left JOIN alat_tangkap as d ON d.id_alat_tangkap = a.id_alat_tangkap`, (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -27,7 +31,7 @@ class Model_Kapal {
     
     static async getId(id) {
         return new Promise((resolve, reject) => {
-            connection.query('SELECT * FROM kapal where id_kapal = ' + id, (err, rows) => {
+            connection.query('SELECT a.*, b.nama_pemilik, c.nama_dpi, d.nama_alat_tangkap FROM kapal as a INNER JOIN pemilik as b ON b.id_pemilik = a.id_pemilik INNER JOIN dpi as c ON c.id_dpi = a.id_dpi INNER JOIN alat_tangkap as d ON d.id_alat_tangkap = a.id_alat_tangkap WHERE a.id_kapal = ' + id, (err, rows) => {
                 if(err) {
                     reject(err);
                 }else {

@@ -32,6 +32,7 @@
                         <% for(var i = 0; i < data.length; i++){ %>
                             <tr>
                                 <th scope="row"><%= (i+1) %></th>
+                                <td><img src="/images/upload/<%= data[i].foto_kapal %>" height="100"></td>
                                 <td><%= data[i].nama_kapal %></td>
                                 <td><%= data[i].nama_alat_tangkap %></td>
                                 <td><%= data[i].nama_dpi %></td>
